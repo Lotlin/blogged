@@ -1,8 +1,12 @@
+import { Header } from './components/Header/Header.jsx';
+import { Main } from './components/Main/Main.jsx';
+
 function App() {
   return (
-    <header className="App-header">
-        <p>Hello React!</p>
-    </header>
+    <>
+      <Header />
+      <Main />
+    </>
   );
 }
 
