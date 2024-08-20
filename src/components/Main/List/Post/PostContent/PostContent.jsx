@@ -1,6 +1,6 @@
 import style from './PostContent.module.css';
 import PropTypes from 'prop-types';
-import {Text} from '../../../../../UI/Text/Text.jsx';
+import {Text} from '../../../../../UI/Text';
 
 export const PostContent = ({title, author}) => (
   <div className={style.content}>
