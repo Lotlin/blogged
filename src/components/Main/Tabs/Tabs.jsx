@@ -2,25 +2,27 @@ import {useEffect, useState} from 'react';
 import style from './Tabs.module.css';
 import {assignId} from '../../../utils/generateRandomId.js';
 import {debounceRaf} from '../../../utils/debounce.js';
+import {Text} from '../../../UI/Text';
 
 import {ReactComponent as ArrowIcon} from './img/arrow.svg';
-import {ReactComponent as Eye} from './img/eye.svg';
 import {ReactComponent as Home} from './img/home.svg';
-import {ReactComponent as Post} from './img/post.svg';
-import {ReactComponent as Save} from './img/save.svg';
+import {ReactComponent as Top} from './img/top.svg';
+import {ReactComponent as Best} from './img/best.svg';
+import {ReactComponent as Hot} from './img/hot.svg';
 
 
 const LIST = [
-  {value: 'Главная', Icon: Eye},
-  {value: 'Просмотренные', Icon: Home},
-  {value: 'Сохраненные', Icon: Post},
-  {value: 'Мои посты', Icon: Save},
+  {value: 'Главная', Icon: Home},
+  {value: 'Топ', Icon: Top},
+  {value: 'Лучшие', Icon: Best},
+  {value: 'Горячие', Icon: Hot},
 ].map(assignId);
 
 
 export const Tabs = () => {
   const [isDropDownOpen, setIsDropdownOpen] = useState(false);
   const [isDropDown, setIsDropDown] = useState(true);
+  const [text, setText] = useState('Главная');
 
   const handleResize = () => {
     if (document.documentElement.clientWidth < 768) {
@@ -47,7 +49,7 @@ export const Tabs = () => {
             className={style.btn}
             onClick={() => setIsDropdownOpen(!isDropDownOpen)}
           >
-            add item
+            <Text>{text}</Text>
             <ArrowIcon width={15} height={15}/>
           </button>
         </div>
@@ -59,9 +61,9 @@ export const Tabs = () => {
             <li className={style.item} key={id}>
               <button
                 className={style.btn}
-                onClick={() => {}}
+                onClick={() => setText(value)}
               >
-                {value}
+                <Text>{value}</Text>
                 {Icon && <Icon width={30} height={30} />}
               </button>
             </li>

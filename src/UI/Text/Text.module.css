@@ -92,7 +92,15 @@
 .fs12 {
   font-size: 12px;
   line-height: 16px;
-} 
+}
+
+.medium {
+  font-weight: 500;
+}
+
+.bold {
+  font-weight: 800;
+}
 
 @media (min-width: 768px) {
   .fst26 {
