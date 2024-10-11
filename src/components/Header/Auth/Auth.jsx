@@ -6,8 +6,9 @@ import {ReactComponent as LoginIcon} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text/Text';
 
-export const Auth = ({token}) => {
+export const Auth = ({token, delToken}) => {
   const [auth, setAuth] = useState({});
+  const [logout, setLogout] = useState(false);
 
   useEffect(() => {
     if (!token) return;
@@ -17,7 +18,10 @@ export const Auth = ({token}) => {
         Authorization: `bearer ${token}`,
       }
     })
-      .then(response => response.json())
+      .then(response => {
+        if (response.status === 401) localStorage.removeItem('bearer');
+        return response.json();
+      })
       .then(({name, icon_img: iconImg}) => {
         const img = iconImg.replace(/\?.*$/, '');
         setAuth({name, img});
@@ -28,8 +32,13 @@ export const Auth = ({token}) => {
       });
   }, [token]);
 
+  const switchLogout = () => {
+    setLogout(!logout);
+  };
+
   return (
-    <div className={style.container}>
+    <div className={style.container}
+      onClick={() => switchLogout()}>
       {auth.name ? (
         <button className={style.btn}>
           <img
@@ -44,10 +53,20 @@ export const Auth = ({token}) => {
           <LoginIcon width={128} height={128}/>
         </Text>
       )}
+      {
+        logout &&
+        <button
+          className={style.logout}
+          onClick={delToken}
+        >
+        выход
+        </button>
+      }
     </div>
   );
 };
 
 Auth.propTypes = {
   token: PropTypes.string,
+  delToken: PropTypes.func,
 };

@@ -22,5 +22,9 @@ export const useToken = (state) => {
     }
   }, [token]);
 
-  return [token];
+  const delToken = () => {
+    setToken('');
+  };
+
+  return [token, delToken];
 };
