@@ -1,5 +1,5 @@
 import style from './Date.module.css';
-import formatDate from '../../utils/formDate.js';
+import formatDate from '../../utils/formDate';
 import propTypes from 'prop-types';
 
 export const Date = ({date}) => (
