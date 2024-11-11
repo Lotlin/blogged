@@ -9,26 +9,26 @@ export const Text = prop => {
     size,
     tsize,
     dsize,
-    fweight,
     className,
     children,
     href,
     center,
+    fweight,
   } = prop;
 
   const classes = classNames(
     className,
-    style[color],
-    style[fweight],
     {[style[`fs${size}`]]: size},
+    style[color],
     {[style[`fst${tsize}`]]: tsize},
     {[style[`dst${dsize}`]]: dsize},
     {[style.center]: center},
+    {[style[`fs${size}`]]: size},
+    style[fweight],
   );
 
   return <As className={classes} href={href}>{children}</As>;
 };
-
 
 Text.propTypes = {
   As: PropTypes.string,
@@ -36,13 +36,12 @@ Text.propTypes = {
   size: PropTypes.number,
   tsize: PropTypes.number,
   dsize: PropTypes.number,
-  fweight: PropTypes.string,
   className: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
     PropTypes.array,
-    PropTypes.any,
+    PropTypes.number,
   ]),
   href: PropTypes.string,
   center: PropTypes.bool,

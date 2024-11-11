@@ -3,6 +3,6 @@ import logo from './img/logo.svg';
 
 export const Logo = () => (
   <a className={style.link} href='/'>
-    <img className={style.logo} src={logo} alt='Логотип Blogged' />
+    <img className={style.logo} src={logo} alt="Логотип Blogged" />
   </a>
 );

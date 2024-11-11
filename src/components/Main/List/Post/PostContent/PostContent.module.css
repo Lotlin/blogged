@@ -39,10 +39,6 @@
     padding-right: 40px;
   }
 
-  .linkAuthor:hover {
-    color: #2d2d2d;
-  }
-
   .linkPost {
     font-size: 26px;
   }
@@ -52,6 +48,10 @@
 
   .linkPost:hover:after {
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .linkAuthor:hover {
+    color: #2d2d2d;
   }
 }
 

@@ -1,5 +1,5 @@
 import style from './PostContent.module.css';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import {Text} from '../../../../../UI/Text';
 
 export const PostContent = ({title, author}) => (
@@ -16,13 +16,14 @@ export const PostContent = ({title, author}) => (
       tsize={14}
       color='orange'
       className={style.linkAuthor}
-      href='#author'>{author}
+      href='#author'
+    >
+      {author}
     </Text>
   </div>
 );
 
 PostContent.propTypes = {
-  title: PropTypes.string,
-  author: PropTypes.string,
+  title: propTypes.string,
+  author: propTypes.string,
 };
-

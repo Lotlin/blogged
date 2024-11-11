@@ -1,28 +1,26 @@
 import {useEffect, useState} from 'react';
 import style from './Tabs.module.css';
-import {assignId} from '../../../utils/generateRandomId.js';
-import {debounceRaf} from '../../../utils/debounce.js';
+import {assignId} from '../../../utils/generateRandomId';
+import {debounceRaf} from '../../../utils/debounce';
 import {Text} from '../../../UI/Text';
 
 import {ReactComponent as ArrowIcon} from './img/arrow.svg';
-import {ReactComponent as Home} from './img/home.svg';
-import {ReactComponent as Top} from './img/top.svg';
-import {ReactComponent as Best} from './img/best.svg';
-import {ReactComponent as Hot} from './img/hot.svg';
-
+import {ReactComponent as MainIcon} from './img/home.svg';
+import {ReactComponent as TopIcon} from './img/top.svg';
+import {ReactComponent as BestIcon} from './img/best.svg';
+import {ReactComponent as HotIcon} from './img/hot.svg';
 
 const LIST = [
-  {value: 'Главная', Icon: Home},
-  {value: 'Топ', Icon: Top},
-  {value: 'Лучшие', Icon: Best},
-  {value: 'Горячие', Icon: Hot},
+  {value: 'Главная', Icon: MainIcon},
+  {value: 'Топ', Icon: TopIcon},
+  {value: 'Лучшие', Icon: BestIcon},
+  {value: 'Горячие', Icon: HotIcon},
 ].map(assignId);
 
-
 export const Tabs = () => {
-  const [isDropDownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const [isDropDown, setIsDropDown] = useState(true);
-  const [text, setText] = useState('Главная');
+  const [btnTitle, setBtnTitle] = useState('Главная');
 
   const handleResize = () => {
     if (document.documentElement.clientWidth < 768) {
@@ -33,43 +31,40 @@ export const Tabs = () => {
   };
 
   useEffect(() => {
-    const debounceResize = debounceRaf(handleResize);
-    debounceResize();
-    window.addEventListener('resize', debounceResize);
-    return () => {
-      window.removeEventListener('resize', debounceResize);
-    };
+    const debounseResize = debounceRaf(handleResize);
+    debounseResize();
+
+    window.addEventListener('resize', debounseResize);
+
+    return () => window.removeEventListener('resize', debounseResize);
   }, []);
 
   return (
     <div className={style.container}>
-      {isDropDown && (
-        <div className={style.wrapperBtn}>
-          <button
-            className={style.btn}
-            onClick={() => setIsDropdownOpen(!isDropDownOpen)}
-          >
-            <Text>{text}</Text>
-            <ArrowIcon width={15} height={15}/>
-          </button>
-        </div>
-      )}
+      {isDropDown && <div className={style.wrapperBtn}>
+        <Text As='button' className={style.btn}
+          onClick={() => setIsDropDownOpen(!isDropDownOpen)}>
+          {btnTitle}
+          <ArrowIcon width={15} height={15} />
+        </Text>
+      </div>}
+
       {(isDropDownOpen || !isDropDown) &&
         <ul className={style.list} onClick={() =>
-          setIsDropdownOpen(false)}>
+          setIsDropDownOpen(false)}>
+
           {LIST.map(({value, id, Icon}) => (
             <li className={style.item} key={id}>
-              <button
+              <Text As='button'
                 className={style.btn}
-                onClick={() => setText(value)}
+                onClick={() => setBtnTitle(value)}
               >
-                <Text>{value}</Text>
+                {value}
                 {Icon && <Icon width={30} height={30} />}
-              </button>
+              </Text>
             </li>
           ))}
-        </ul>
-      }
+        </ul>}
     </div>
   );
 };

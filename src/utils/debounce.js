@@ -6,7 +6,6 @@ export const debounceRaf = fn => {
 
     raf = requestAnimationFrame(() => {
       fn(...args);
-
       raf = 0;
     });
   };
