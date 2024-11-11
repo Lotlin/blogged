@@ -1,10 +1,11 @@
 import style from './Post.module.css';
-import PropTypes from 'prop-types';
-import {PostImage} from './PostImage/PostImage.jsx';
-import {PostContent} from './PostContent/PostContent.jsx';
-import {Rating} from '../../../Rating/Rating.jsx';
-import {Date} from '../../../Date/Date.jsx';
-import {PostDelete} from './PostDelete/PostDelete.jsx';
+import propTypes from 'prop-types';
+
+import PostImg from './PostImg';
+import PostContent from './PostContent';
+import PostDelete from './PostDelete';
+import Rating from '../../../Rating';
+import Date from '../../../Date';
 
 
 export const Post = ({postData}) => {
@@ -12,15 +13,15 @@ export const Post = ({postData}) => {
 
   return (
     <li className={style.post}>
-      <PostImage title={title} />
-      <PostContent title={title} author={author} />
+      <PostImg title = {title}/>
+      <PostContent title = {title} author={author}/>
+      <PostDelete />
       <Rating ups={ups}/>
       <Date date={date}/>
-      <PostDelete />
     </li>
   );
 };
 
 Post.propTypes = {
-  postData: PropTypes.object,
+  postData: propTypes.object,
 };

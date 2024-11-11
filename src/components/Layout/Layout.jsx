@@ -1,9 +1,9 @@
 import style from './Layout.module.css';
 import PropTypes from 'prop-types';
 
-export const Layout = ({children}) => (
+export const Layout = (props) => (
   <div className={style.container}>
-    {children}
+    {props.children}
   </div>
 );
 
@@ -12,5 +12,5 @@ Layout.propTypes = {
     PropTypes.string,
     PropTypes.object,
     PropTypes.array,
-  ]),
+  ])
 };

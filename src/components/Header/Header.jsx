@@ -1,3 +1,4 @@
+import React from 'react';
 import style from './Header.module.css';
 import Layout from '../Layout';
 import Logo from './Logo';
@@ -11,7 +12,7 @@ export const Header = ({token, delToken}) => (
     <Layout>
       <div className={style.gridContainer}>
         <Logo />
-        <Heading text='Заголовок'></Heading>
+        <Heading text={'Blogged'}/>
         <Search />
         <Auth token={token} delToken={delToken} />
       </div>

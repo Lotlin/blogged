@@ -1,25 +1,29 @@
 import style from './Auth.module.css';
 import {useEffect, useState} from 'react';
-import {URL_API} from '../../../api/const';
 import PropTypes from 'prop-types';
-import {ReactComponent as LoginIcon} from './img/login.svg';
+import {ReactComponent as AuthSvg} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
-import {Text} from '../../../UI/Text/Text';
+import {Text} from '../../../UI/Text';
+import {URL_API, URL_USER_IDENTETY} from '../../../api/const';
+
 
 export const Auth = ({token, delToken}) => {
   const [auth, setAuth] = useState({});
-  const [logout, setLogout] = useState(false);
+  const [showLogOutBtn, setShowLogOutBtn] = useState(false);
 
   useEffect(() => {
     if (!token) return;
 
-    fetch(`${URL_API}/api/v1/me`, {
+    fetch(`${URL_API}${URL_USER_IDENTETY}`, {
       headers: {
         Authorization: `bearer ${token}`,
-      }
+      },
     })
       .then(response => {
-        if (response.status === 401) localStorage.removeItem('bearer');
+        if (response.status === 401) {
+          localStorage.removeItem('bearer');
+        }
+
         return response.json();
       })
       .then(({name, icon_img: iconImg}) => {
@@ -32,15 +36,18 @@ export const Auth = ({token, delToken}) => {
       });
   }, [token]);
 
-  const switchLogout = () => {
-    setLogout(!logout);
+  const handleLogOutBtn = () => {
+    delToken(),
+    setShowLogOutBtn(!showLogOutBtn);
   };
 
   return (
-    <div className={style.container}
-      onClick={() => switchLogout()}>
+    <div className={style.container} aria-label='войти'>
       {auth.name ? (
-        <button className={style.btn}>
+        <button
+          className={style.btn}
+          onClick={() => setShowLogOutBtn(!showLogOutBtn)}
+        >
           <img
             className={style.img}
             src={auth.img}
@@ -48,18 +55,20 @@ export const Auth = ({token, delToken}) => {
             alt={`Аватар ${auth.name}`}
           />
         </button>
-      ) : (
-        <Text className={style.authLink} As='a' href={urlAuth}>
-          <LoginIcon width={128} height={128}/>
-        </Text>
+        ) : (
+          <Text
+            className={style.authLink}
+            As='a'
+            href={urlAuth}>
+            <AuthSvg className={style.svg} />
+          </Text>
       )}
-      {
-        logout &&
+      {showLogOutBtn &&
         <button
           className={style.logout}
-          onClick={delToken}
+          onClick={handleLogOutBtn}
         >
-        выход
+          Выйти
         </button>
       }
     </div>

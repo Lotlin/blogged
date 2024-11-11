@@ -4,15 +4,14 @@ module.exports = {
       {
         type: 'input',
         name: 'component_name',
-        message: 'Имя компонента',
+        message: 'Component name',
       },
       {
         type: 'input',
         name: 'dir',
-        message: 'Вложенная директория?(Optional)'
+        message: 'Subdirectory',
       }
     ]
-
 
     return inquirer.prompt(questions).then(answers => {
       const {component_name, dir} = answers;

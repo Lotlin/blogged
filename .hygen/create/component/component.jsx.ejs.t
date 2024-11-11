@@ -8,5 +8,5 @@ export const <%= component_name %> = () => {
 
   return (
     <div></div>
-  )
+  );
 };
