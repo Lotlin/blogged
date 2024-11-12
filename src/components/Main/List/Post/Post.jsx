@@ -1,19 +1,17 @@
 import style from './Post.module.css';
 import propTypes from 'prop-types';
-
 import PostImg from './PostImg';
 import PostContent from './PostContent';
 import PostDelete from './PostDelete';
 import Rating from '../../../Rating';
 import Date from '../../../Date';
 
-
 export const Post = ({postData}) => {
-  const {title, author, ups, date} = postData;
+  const {title, author, ups, thumbnail, date} = postData;
 
   return (
     <li className={style.post}>
-      <PostImg title = {title}/>
+      <PostImg title = {title} thumbnail = {thumbnail}/>
       <PostContent title = {title} author={author}/>
       <PostDelete />
       <Rating ups={ups}/>
@@ -25,3 +23,4 @@ export const Post = ({postData}) => {
 Post.propTypes = {
   postData: propTypes.object,
 };
+

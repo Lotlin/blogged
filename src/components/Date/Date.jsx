@@ -7,5 +7,5 @@ export const Date = ({date}) => (
 );
 
 Date.propTypes = {
-  date: propTypes.string,
+  date: propTypes.number,
 };

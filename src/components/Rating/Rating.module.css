@@ -31,6 +31,7 @@
   background-image: url('./img/down.svg');
 }
 
+
 @media (min-width: 580px) {
   .rating {
     padding-top: 0;
