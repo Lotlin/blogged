@@ -1,44 +1,21 @@
 import style from './Auth.module.css';
-import {useEffect, useState} from 'react';
-import PropTypes from 'prop-types';
+import {useContext, useState} from 'react';
 import {ReactComponent as AuthSvg} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text';
-import {URL_API, URL_USER_IDENTETY} from '../../../api/const';
+import {tokenContext} from '../../../context/tokenContext';
+import {authContext} from '../../../context/authContext';
 
-
-export const Auth = ({token, delToken}) => {
-  const [auth, setAuth] = useState({});
+export const Auth = () => {
+  const {delToken} = useContext(tokenContext);
   const [showLogOutBtn, setShowLogOutBtn] = useState(false);
+  const {auth, clearAuth} = useContext(authContext);
 
-  useEffect(() => {
-    if (!token) return;
-
-    fetch(`${URL_API}${URL_USER_IDENTETY}`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-      },
-    })
-      .then(response => {
-        if (response.status === 401) {
-          localStorage.removeItem('bearer');
-        }
-
-        return response.json();
-      })
-      .then(({name, icon_img: iconImg}) => {
-        const img = iconImg.replace(/\?.*$/, '');
-        setAuth({name, img});
-      })
-      .catch(err => {
-        console.log(err);
-        setAuth({});
-      });
-  }, [token]);
 
   const handleLogOutBtn = () => {
     delToken(),
     setShowLogOutBtn(!showLogOutBtn);
+    clearAuth();
   };
 
   return (
@@ -73,9 +50,4 @@ export const Auth = ({token, delToken}) => {
       }
     </div>
   );
-};
-
-Auth.propTypes = {
-  token: PropTypes.string,
-  delToken: PropTypes.func,
 };
