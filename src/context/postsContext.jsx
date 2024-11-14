@@ -16,6 +16,7 @@ export const PostsContextProvider = ({children}) => {
       ups: data.data.ups,
       date: data.data.created,
       thumbnail: data.data.thumbnail,
+      markdown: data.data.selftext,
     };
     postsData.push(neededPostData);
   });

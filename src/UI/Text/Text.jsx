@@ -14,6 +14,7 @@ export const Text = prop => {
     href,
     center,
     fweight,
+    ...rest
   } = prop;
 
   const classes = classNames(
@@ -27,7 +28,7 @@ export const Text = prop => {
     style[fweight],
   );
 
-  return <As className={classes} href={href}>{children}</As>;
+  return <As className={classes} href={href} {...rest}>{children}</As>;
 };
 
 Text.propTypes = {
