@@ -3,17 +3,17 @@ import {useContext, useState} from 'react';
 import {ReactComponent as AuthSvg} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text';
-import {tokenContext} from '../../../context/tokenContext';
 import {authContext} from '../../../context/authContext';
+import {useDispatch} from 'react-redux';
+import {deleteToken} from '../../../store/index';
 
 export const Auth = () => {
-  const {delToken} = useContext(tokenContext);
   const [showLogOutBtn, setShowLogOutBtn] = useState(false);
   const {auth, clearAuth} = useContext(authContext);
-
+  const dispatch = useDispatch();
 
   const handleLogOutBtn = () => {
-    delToken(),
+    dispatch(deleteToken());
     setShowLogOutBtn(!showLogOutBtn);
     clearAuth();
   };

@@ -1,11 +1,14 @@
-import {useContext, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {URL_API, URL_COMMETS} from '../api/const';
-import {tokenContext} from '../context/tokenContext';
+import {useDispatch} from 'react-redux';
+import {getToken} from './token.js';
+import {deleteToken} from '../store/index';
 
 export const useCommentsData = (id) => {
-  const {token, delToken} = useContext(tokenContext);
   const [postsData, setCommentsData] = useState([{post: null, comments: []}]);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const token = getToken();
 
   useEffect(() => {
     if (!token || !id) return;
@@ -44,7 +47,7 @@ export const useCommentsData = (id) => {
       })
       .catch(err => {
         console.log(err);
-        delToken();
+        dispatch(deleteToken());
         setLoading(false);
       });
   }, [id, token]);
