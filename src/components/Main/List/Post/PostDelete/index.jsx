@@ -1,2 +1,2 @@
-import {PostDelete} from './PostDelete';
+import { PostDelete } from './PostDelete';
 export default PostDelete;

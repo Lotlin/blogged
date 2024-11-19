@@ -2,9 +2,9 @@ import CommentItem from './CommentItem';
 import style from './Comments.module.css';
 import PropTypes from 'prop-types';
 
-export const Comments = ({comments}) => (
+export const Comments = ({ comments }) => (
   <ul className={style.list}>
-    { comments ? (
+    {comments ? (
         comments.map(comment => (
           <CommentItem key={comment.id} comment={comment}/>
         ))

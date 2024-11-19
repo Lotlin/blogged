@@ -1,9 +1,9 @@
 import style from './CommentItem.module.css';
-import {Text} from '../../../../UI/Text';
+import { Text } from '../../../../UI/Text';
 import Date from '../../../Date';
 import PropTypes from 'prop-types';
 
-export const CommentItem = ({comment}) => (
+export const CommentItem = ({ comment }) => (
   <li className={style.item}>
     <Text
       As='h3'

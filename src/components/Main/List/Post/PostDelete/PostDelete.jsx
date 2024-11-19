@@ -1,6 +1,6 @@
 import style from './PostDelete.module.css';
 
-import {ReactComponent as DeleteSvg} from '../img/delete.svg';
+import { ReactComponent as DeleteSvg } from '../img/delete.svg';
 
 
 export const PostDelete = () => (

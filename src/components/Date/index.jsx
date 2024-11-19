@@ -1,2 +1,2 @@
-import {Date} from './Date';
+import { Date } from './Date';
 export default Date;

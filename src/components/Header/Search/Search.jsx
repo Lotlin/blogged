@@ -1,6 +1,6 @@
 import style from './Search.module.css';
 
-import {ReactComponent as SearchSvg} from './img/search.svg';
+import { ReactComponent as SearchSvg } from './img/search.svg';
 
 export const Search = () => (
   <form className={style.form}>

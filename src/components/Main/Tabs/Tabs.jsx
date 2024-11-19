@@ -1,20 +1,20 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import style from './Tabs.module.css';
-import {assignId} from '../../../utils/generateRandomId';
-import {debounceRaf} from '../../../utils/debounce';
-import {Text} from '../../../UI/Text';
+import { assignId } from '../../../utils/generateRandomId';
+import { debounceRaf } from '../../../utils/debounce';
+import { Text } from '../../../UI/Text';
 
-import {ReactComponent as ArrowIcon} from './img/arrow.svg';
-import {ReactComponent as MainIcon} from './img/home.svg';
-import {ReactComponent as TopIcon} from './img/top.svg';
-import {ReactComponent as BestIcon} from './img/best.svg';
-import {ReactComponent as HotIcon} from './img/hot.svg';
+import { ReactComponent as ArrowIcon } from './img/arrow.svg';
+import { ReactComponent as MainIcon } from './img/home.svg';
+import { ReactComponent as TopIcon } from './img/top.svg';
+import { ReactComponent as BestIcon } from './img/best.svg';
+import { ReactComponent as HotIcon } from './img/hot.svg';
 
 const LIST = [
-  {value: 'Главная', Icon: MainIcon},
-  {value: 'Топ', Icon: TopIcon},
-  {value: 'Лучшие', Icon: BestIcon},
-  {value: 'Горячие', Icon: HotIcon},
+  { value: 'Главная', Icon: MainIcon },
+  { value: 'Топ', Icon: TopIcon },
+  { value: 'Лучшие', Icon: BestIcon },
+  { value: 'Горячие', Icon: HotIcon },
 ].map(assignId);
 
 export const Tabs = () => {
@@ -53,7 +53,7 @@ export const Tabs = () => {
         <ul className={style.list} onClick={() =>
           setIsDropDownOpen(false)}>
 
-          {LIST.map(({value, id, Icon}) => (
+          {LIST.map(({ value, id, Icon }) => (
             <li className={style.item} key={id}>
               <Text As='button'
                 className={style.btn}

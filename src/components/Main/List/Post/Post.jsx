@@ -6,13 +6,13 @@ import PostDelete from './PostDelete';
 import Rating from '../../../Rating';
 import Date from '../../../Date';
 
-export const Post = ({postData}) => {
+export const Post = ({ postData }) => {
   const {
     title,
     author,
     ups,
     thumbnail,
-    date,
+    created: date,
     markdown,
     id,
   } = postData;

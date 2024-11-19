@@ -2,7 +2,7 @@ import style from './PostImg.module.css';
 import noPhoto from '../img/noPhoto.jpg';
 import propTypes from 'prop-types';
 
-export const PostImg = ({title, thumbnail}) => {
+export const PostImg = ({ title, thumbnail }) => {
   const srcImg = thumbnail.startsWith('http') ? thumbnail : noPhoto;
 
   return (

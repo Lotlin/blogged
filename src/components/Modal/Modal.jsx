@@ -1,13 +1,14 @@
 import style from './Modal.module.css';
-import {ReactComponent as CloseIcon} from './img/close.svg';
+import { ReactComponent as CloseIcon } from './img/close.svg';
 import propTypes from 'prop-types';
 import Markdown from 'markdown-to-jsx';
 import ReactDOM from 'react-dom';
-import {useEffect, useRef} from 'react';
-import {useCommentsData} from '../../hooks/useCommentsData';
-import {Text} from '../../UI/Text';
+import { useEffect, useRef } from 'react';
+import { useCommentsData } from '../../hooks/useCommentsData';
+import { Text } from '../../UI/Text';
 import FormComment from './FormComment';
 import Comments from './Comments';
+import { Loader } from '../../UI/Loader/Loader';
 
 export const Modal = ({
   id,
@@ -44,15 +45,14 @@ export const Modal = ({
     };
   }, []);
 
-  const {postsData, loading} = useCommentsData(id);
-  const [post, comments] = postsData;
+  const [post, comments, loading] = useCommentsData(id);
 
   return (
     ReactDOM.createPortal(
       <div className={style.overlay} ref={overlayRef}>
         <div className={style.modal}>
           {loading ? (
-            <div>...Загрузка</div>
+            <Loader />
             ) : (
               <>
                 <Text As='h2' className={style.title}>{post.title}</Text>

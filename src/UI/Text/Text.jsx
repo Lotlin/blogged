@@ -19,12 +19,12 @@ export const Text = prop => {
 
   const classes = classNames(
     className,
-    {[style[`fs${size}`]]: size},
+    { [style[`fs${size}`]]: size },
     style[color],
-    {[style[`fst${tsize}`]]: tsize},
-    {[style[`dst${dsize}`]]: dsize},
-    {[style.center]: center},
-    {[style[`fs${size}`]]: size},
+    { [style[`fst${tsize}`]]: tsize },
+    { [style[`dst${dsize}`]]: dsize },
+    { [style.center]: center },
+    { [style[`fs${size}`]]: size },
     style[fweight],
   );
 
