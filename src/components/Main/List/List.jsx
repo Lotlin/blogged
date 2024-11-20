@@ -1,23 +1,49 @@
-import { usePosts } from '../../../hooks/usePosts';
 import style from './List.module.css';
 import Post from './Post';
-import { Loader } from '../../../UI/Loader/Loader';
+import { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { postsRequestAsync } from '../../../store/posts/postsAction';
+import { Outlet, useParams } from 'react-router-dom';
 
 export const List = () => {
-  const [postsData, loading] = usePosts();
+  const postsData = useSelector(state => state.posts.data);
+  const endList = useRef(null);
+  const dispatch = useDispatch();
+  const { page } = useParams();
 
-  if (loading) {
-    return <Loader />;
-  }
+  useEffect(() => {
+    dispatch(postsRequestAsync(page));
+  }, [page]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        dispatch(postsRequestAsync());
+      }
+    }, {
+      rootMargin: '100px',
+    });
+
+    observer.observe(endList.current);
+
+    return () => {
+      if (endList.current) {
+        observer.unobserve(endList.current);
+      }
+    };
+  }, [endList.current]);
 
   return (
-    <ul className={style.list}>
-      {
-        postsData.map((postData) => (
-          // данные приходят в виде объекта, 1-й ключ- kind, 2-й- нужные дынные
+    <>
+      <ul className={style.list}>
+        {postsData.map((postData) => (
+        // данные приходят в виде объекта, 1-й ключ- kind, 2-й- нужные дынные
           <Post key={postData.data.id} postData={postData.data} />
-        ))
-      }
-    </ul>
+        ))}
+        <li ref={endList} className={style.end}/>
+      </ul>
+      <Outlet />
+    </>
   );
 };
+

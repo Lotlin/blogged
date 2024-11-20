@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import style from './Rating.module.css';
-import { Text } from '../../UI/Text';
+import { Text } from '../UI/Text';
 
 export const Rating = ({ ups }) => (
   <div className={style.rating}>

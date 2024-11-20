@@ -1,5 +1,5 @@
 import style from './FormComment.module.css';
-import { Text } from '../../../UI/Text';
+import { Text } from '../../UI/Text';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateComment } from '../../../store/commentReducer.js';
 import { useAuth } from '../../../hooks/useAuth.js';

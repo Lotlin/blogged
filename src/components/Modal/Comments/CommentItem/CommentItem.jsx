@@ -1,5 +1,5 @@
 import style from './CommentItem.module.css';
-import { Text } from '../../../../UI/Text';
+import { Text } from '../../../UI/Text';
 import Date from '../../../Date';
 import PropTypes from 'prop-types';
 

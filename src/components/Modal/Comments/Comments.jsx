@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 export const Comments = ({ comments }) => (
   <ul className={style.list}>
     {comments ? (
-        comments.map(comment => (
+        comments.map(comment => comment.body && (
           <CommentItem key={comment.id} comment={comment}/>
         ))
       ) : (

@@ -5,21 +5,21 @@ import Markdown from 'markdown-to-jsx';
 import ReactDOM from 'react-dom';
 import { useEffect, useRef } from 'react';
 import { useCommentsData } from '../../hooks/useCommentsData';
-import { Text } from '../../UI/Text';
+import { Text } from '../UI/Text/Text';
 import FormComment from './FormComment';
 import Comments from './Comments';
-import { Loader } from '../../UI/Loader/Loader';
+import { Loader } from '../UI/Loader/Loader';
+import { useNavigate, useParams } from 'react-router-dom';
 
-export const Modal = ({
-  id,
-  closeModal,
-}) => {
+export const Modal = () => {
+  const { id, page } = useParams();
+  const navigate = useNavigate();
   const overlayRef = useRef(null);
 
   const handleClick = e => {
     const target = e.target;
     if (target === overlayRef.current) {
-      closeModal();
+      navigate(`/category/${page}`);
     }
   };
 
@@ -33,7 +33,7 @@ export const Modal = ({
 
   const handleEscape = e => {
     if (e.key === 'Escape') {
-      closeModal();
+      navigate(`/category/${page}`);
     }
   };
 
@@ -77,7 +77,9 @@ export const Modal = ({
 
                 <Comments comments={comments} />
 
-                <button className={style.close} onClick={closeModal}>
+                <button className={style.close} onClick={() => {
+                  navigate(`/category/${page}`);
+                }}>
                   <CloseIcon />
                 </button>
               </>

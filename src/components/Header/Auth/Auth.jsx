@@ -2,11 +2,11 @@ import style from './Auth.module.css';
 import { useState } from 'react';
 import { ReactComponent as AuthSvg } from './img/login.svg';
 import { urlAuth } from '../../../api/auth';
-import { Text } from '../../../UI/Text';
+import { Text } from '../../UI/Text/Text';
 import { useDispatch } from 'react-redux';
 import { deleteToken } from '../../../store/tokenReducer';
 import { useAuth } from '../../../hooks/useAuth';
-import { Loader } from '../../../UI/Loader/Loader';
+import { Loader } from '../../UI/Loader/Loader';
 
 export const Auth = () => {
   const [showLogOutBtn, setShowLogOutBtn] = useState(false);
