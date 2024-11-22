@@ -1,71 +1,31 @@
 import axios from 'axios';
-import { URL_API } from '../../api/const';
-import { deleteToken } from '../tokenReducer';
+import { URL_API, URL_POSTS } from '../../api/const';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const POSTS_REQUEST = 'POST_REQUEST';
 export const POSTS_REQUEST_SUCCESS = 'POST_REQUEST_SUCCESS';
 export const POSTS_REQUEST_ERROR = 'POST_REQUEST_ERROR';
-export const POSTS_REQUEST_SUCCESS_AFTER = 'POSTS_REQUEST_SUCCESS_AFTER';
-export const CHANGE_PAGE = 'CHANGE_PAGE';
 
-export const postsRequest = () => ({
-  type: POSTS_REQUEST,
-  error: '',
-});
+export const postsRequestAsync = createAsyncThunk(
+  'posts/fetch',
+  (_, { getState }) => {
+    const token = getState().token.token;
 
-export const postsRequestSuccess = data => ({
-  type: POSTS_REQUEST_SUCCESS,
-  data: data.children,
-  after: data.after,
-});
+    if (!token) return;
 
-export const postsRequestSuccessAfter = data => ({
-  type: POSTS_REQUEST_SUCCESS_AFTER,
-  data: data.children,
-  after: data.after,
-});
-
-export const postsRequestError = error => ({
-  type: POSTS_REQUEST_ERROR,
-  error,
-});
-
-export const changePage = page => ({
-  type: CHANGE_PAGE,
-  page,
-});
-
-export const postsRequestAsync = newPage => (dispatch, getState) => {
-  let page = getState().posts.page;
-
-  if (newPage) {
-    page = newPage;
-    dispatch(changePage(page));
-  }
-
-  const token = getState().token.token;
-  const after = getState().posts.after;
-  const loading = getState().posts.loading;
-  const isLast = getState().posts.isLast;
-
-  if (!token || loading || isLast) return;
-
-  dispatch(postsRequest());
-
-  axios(`${URL_API}/${page}?limit=10&${after ? `after=${after}` : ''}`, {
-    headers: {
-      Authorization: `bearer ${token}`,
-    },
-  })
-    .then((data) => {
-      if (after) {
-        dispatch(postsRequestSuccessAfter(data.data.data));
-      } else {
-        dispatch(postsRequestSuccess(data.data.data));
-      }
-    })
-    .catch(err => {
-      dispatch(deleteToken());
-      dispatch(postsRequestError(err.toString()));
-    });
-};
+    return axios(`${URL_API}${URL_POSTS}`,
+      {
+        headers: {
+          Authorization: `bearer ${token}`,
+        },
+      })
+      .then((data) => {
+        const postsData = data.data.data;
+        return postsData;
+      })
+      .catch((error) => {
+        console.error('Error in Axios request:', error);
+        return { error: error.toString() };
+      });
+  },
+);
