@@ -5,7 +5,6 @@ import Tabs from './Tabs';
 import List from './List';
 import Modal from '../Modal';
 import MainPage from './MainPage';
-import NoPage from '../UI/NoPage';
 
 export const Main = () => (
   <main className={style.main}>
