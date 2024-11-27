@@ -19,7 +19,11 @@ export const postsSLice = createSlice({
         state.loading = true;
       })
       .addCase(postsRequestAsync.fulfilled, (state, action) => {
-        state.data = action.payload.children;
+        if (action.payload && action.payload.children) {
+          state.data = action.payload.children;
+        } else {
+          state.data = [];
+        }
         state.error = '';
         state.loading = false;
       })
