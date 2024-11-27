@@ -17,7 +17,6 @@ export const Main = () => (
         <Route path='/category/:page' element={<List />}>
           <Route path='post/:id' element={<Modal />} />
         </Route>
-        <Route path='*' element={<NoPage />} />
       </Routes>
     </Layout>
   </main>
